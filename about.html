@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אודות - מאפיית שירה</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3e5d8;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background-color: #8b5e3b;
+        }
+        .navbar a {
+            color: white !important;
+            font-weight: bold;
+        }
+        .header {
+            background-color: #c49a6c;
+            padding: 30px;
+            color: white;
+            animation: fadeInDown 1.5s;
+        }
+        .footer {
+            background-color: #8b5e3b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            animation: fadeInUp 1.5s;
+        }
+        h1, h2, p {
+            color: #5a3e2b;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">מאפיית שירה</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="menu.html">תפריט</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">תגובות</a></li> <!-- קישור חדש -->
+                    <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html">עגלת קניות</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="text-center header">
+        <h1 class="text-white">הסיפור של שירה</h1>
+    </header>
+    
+    <div class="container content">
+        <p class="lead text-center">
+            שירה היא אופה מהלב, כזו שהופכת כל מתכון לחגיגה.
+        </p>
+        <p>
+            כבר מגיל צעיר, שירה אהבה לאפות. עם קמח בין האצבעות וחיוך שלא יורד מהפנים,
+            היא נהגה לבלות שעות במטבח הביתי שלה וליצור מאפים מופלאים שכל המשפחה והחברים אהבו.
+            מהר מאוד התחביב הפך לאהבה גדולה, האהבה הפכה לחלום, והחלום הפך למציאות.
+        </p>
+        <p>
+            היום, שירה עומדת בגאווה מאחורי מאפייה מצליחה שמציעה מאפים טריים, עשירים בטעמים,
+            ומלאים באהבה. כל חלה, עוגה או עוגייה שיוצאת מהתנור שלה מספרת את הסיפור שלה, סיפור על אהבה, תשוקה, והרבה שמחה.
+        </p>
+        <p class="text-center fw-bold">
+            בואו לטעום, להרגיש ולהתאהב מחדש – מאפיית שירה מחכה לכם.
+        </p>
+        <div class="image-container">
+            <img src="/shira_bakes/pic1.jpg" alt="מאפים של שירה">
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>כל הזכויות שמורות למאפיית שירה © 2024</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
