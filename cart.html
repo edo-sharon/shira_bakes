@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עגלת קניות - מאפיית שירה</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #f3e5d8;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #8b5e3b;
+        }
+
+        .navbar a {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .header {
+            background-color: #c49a6c;
+            padding: 20px;
+            color: white;
+        }
+
+        .footer {
+            background-color: #8b5e3b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .btn-sm {
+            font-size: 0.9rem;
+        }
+
+        .btn-paybox {
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+        }
+
+        .btn-paybox:hover {
+            background-color: #0097a7;
+        }
+
+        .container {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">מאפיית שירה</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="menu.html">תפריט</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">תגובות</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html">עגלת קניות</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="text-center header">
+        <h1 class="text-white">עגלת הקניות שלך</h1>
+    </header>
+
+    <div class="container mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>מוצר</th>
+                    <th>מחיר</th>
+                    <th>כמות</th>
+                    <th>הסרה</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+                <tr><td colspan="4" class="text-center">העגלה שלך ריקה</td></tr>
+            </tbody>
+        </table>
+        <h3 class="text-end">סה"כ: ₪<span id="total-price">0</span></h3>
+
+        <div class="text-center mt-3 d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn btn-success btn-sm px-4" onclick="checkout()">השלם הזמנה (אשראי)</button>
+            <button class="btn btn-primary btn-sm px-4" onclick="payWithBit()">שלם עם ביט (Bit)</button>
+            <button class="btn btn-sm px-4 btn-paybox" onclick="payWithPayBox()">שלם עם פייבוקס (PayBox)</button>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <p>כל הזכויות שמורות למאפיית שירה © 2024</p>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function updateCart() {
+            const cartBody = document.getElementById('cart-body');
+            cartBody.innerHTML = '';
+            let totalPrice = 0;
+            cart.forEach((item, index) => {
+                cartBody.innerHTML += `<tr>
+                    <td>${item.name}</td>
+                    <td>₪${item.price}</td>
+                    <td><input type='number' min='1' value='${item.quantity}' onchange='updateQuantity(${index}, this.value)'></td>
+                    <td><button class='btn btn-danger btn-sm' onclick='removeFromCart(${index})'>X</button></td>
+                </tr>`;
+                totalPrice += item.price * item.quantity;
+            });
+            document.getElementById('total-price').textContent = totalPrice;
+            if (cart.length === 0) {
+                cartBody.innerHTML = '<tr><td colspan="4" class="text-center">העגלה שלך ריקה</td></tr>';
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCart();
+        }
+
+        function updateQuantity(index, quantity) {
+            cart[index].quantity = parseInt(quantity);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCart();
+        }
+
+        function checkout() {
+            alert('הזמנתך התקבלה!');
+            cart = [];
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCart();
+        }
+
+        function payWithBit() {
+            const totalPrice = document.getElementById('total-price').textContent;
+            window.location.href = `bit://pay?amount=${totalPrice}`;
+        }
+
+        function payWithPayBox() {
+            const totalPrice = document.getElementById('total-price').textContent;
+            window.location.href = `https://payboxapp.page.link/?link=https://payboxapp.com/&amount=${totalPrice}`;
+        }
+
+        updateCart();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
